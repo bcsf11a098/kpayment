@@ -1,0 +1,28 @@
+{
+    "name": "panic/payments",
+    "description": "Multi payments package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Filip Panic",
+            "email": "filip@cloudhorizon.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Panic\\Payments\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "5.1.*",
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~4.0",
+        "phpspec/phpspec": "~2.1"
+    }
+}
