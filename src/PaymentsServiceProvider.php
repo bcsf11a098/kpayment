@@ -2,9 +2,7 @@
 
 namespace Panic\Payments;
 
-
 use Illuminate\Support\ServiceProvider;
-
 
 class PaymentsServiceProvider extends ServiceProvider
 {
@@ -22,7 +20,7 @@ class PaymentsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->handleConfigs();
+        // $this->handleConfigs();
         // $this->handleMigrations();
         // $this->handleViews();
         // $this->handleTranslations();

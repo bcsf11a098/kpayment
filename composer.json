@@ -17,7 +17,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "illuminate/support": "~5"
+        "illuminate/support": "~5",
+        "checkout/checkout-php-api": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
