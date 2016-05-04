@@ -61,7 +61,7 @@ public function checkout(PaymentProcessor $processor)
 ### Prerequisites ###
 
 php >= 5.5.9
-laravel/framework : 5.1.*
+laravel/framework : 5.2.*
 
 ### Contribution guidelines ###
 
