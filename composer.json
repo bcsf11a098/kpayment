@@ -1,5 +1,6 @@
 {
     "name": "panic/payments",
+    "version": "1.0.0",
     "description": "Multi payments package",
     "license": "MIT",
     "authors": [
@@ -13,7 +14,6 @@
             "Panic\\Payments\\": "src/"
         }
     },
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
@@ -25,5 +25,7 @@
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

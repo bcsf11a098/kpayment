@@ -20,8 +20,8 @@ class PaymentsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->handleConfigs();
-        // $this->handleMigrations();
+        $this->handleConfigs();
+        $this->handleMigrations();
         // $this->handleViews();
         // $this->handleTranslations();
         // $this->handleRoutes();
