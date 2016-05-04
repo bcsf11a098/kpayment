@@ -4,9 +4,9 @@
 ### Payments Package for Laravel 5.* ###
 
 * Package for multiple payment methods
-* Version 0.0.1
+* Version 1.0.0
 * https://bitbucket.org/cloudhorizon/payments/
-* This package wraps two other packages https://github.com/davibennun/laravel-push-notification for push notifications and https://github.com/twilio/twilio-php for sms notifications
+* This package uses https://github.com/CKOTech/checkout-php-library for checkout.com payment processor
 
 ### Installation ###
 
@@ -14,7 +14,7 @@
 ```
 "require": {
     ...
-    "panic/payments" : "*"
+    "panic/payments" : "~1.0"
 }
 
 "minimum-stability": "dev",
@@ -40,13 +40,23 @@
 * Copy the config and view files into your project by running:
 
 ```
-php artisan vendor:publish --provider="Panic\Notifications\NotificationsServiceProvider"
+php artisan vendor:publish --provider="Panic\Payments\PaymentsServiceProvider"
 ```
-* Update config file: config/notifications.php with your credentials
-* Update view fale template for email: resource/views/panic/notifications/emails/notification.blade.php
+* Update config file: config/payments.php with your credentials
+* Update model, relationships and transformer using database/migrations/2016_05_04_115225_create_payment_info_table.php
 
 ### Usage ###
 
+```
+use Panic\Payments\PaymentProcessor;
+
+public function checkout(PaymentProcessor $processor)
+    {
+        ...
+        $response = $processor->setProcessor(1)->setUser($user)->setAmount(100)->charge();
+        ...
+    }
+```
 
 ### Prerequisites ###
 
