@@ -26,7 +26,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
 {
     public function createCustomer()
     {
-        $apiClient = new ApiClient(Config::get("payments.key.Checkout"));
+        $apiClient = new ApiClient(Config::get('payments.key.Checkout'));
         $customerService = $apiClient->customerService();
 
         $customerCreateObject = new CustomerCreate();
@@ -36,8 +36,8 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
         $billingDetails = new Address();
         $phone = new Phone();
 
-        $phone->setNumber("203 583 44 55");
-        $phone->setCountryCode("44");
+        $phone->setNumber('203 583 44 55');
+        $phone->setCountryCode('44');
 
         $customerCreateObject->setEmail('ficko@cloudhorizon.com');
         $customerCreateObject->setName('Filip');
@@ -73,7 +73,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
 
     public function createCard()
     {
-        $apiClient = new ApiClient(Config::get("payments.key.Checkout"));
+        $apiClient = new ApiClient(Config::get('payments.key.Checkout'));
         $cardService = $apiClient->cardService();
         $cardsRequestModel = new CardCreate();
 
@@ -82,8 +82,8 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
         $billingDetails = new Address();
         $phone = new Phone();
 
-        $phone->setNumber("203 583 44 55");
-        $phone->setCountryCode("44");
+        $phone->setNumber('203 583 44 55');
+        $phone->setCountryCode('44');
 
         $billingDetails->setAddressLine1('1 Glading Fields"');
         $billingDetails->setPostcode('N16 2BR');
@@ -113,7 +113,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
 
     public function chargeByCardToken()
     {
-        $apiClient = new ApiClient(Config::get("payments.key.Checkout"));
+        $apiClient = new ApiClient(Config::get('payments.key.Checkout'));
         $charge = $apiClient->chargeService();
 
         // create an instance of CardTokenChargeCreate Model
@@ -137,7 +137,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
         $CardTokenChargePayload->setValue('100');
         $CardTokenChargePayload->setCurrency('usd');
         $CardTokenChargePayload->setTrackId('Demo-0001');
-        $CardTokenChargePayload->setCardToken("pay_tok_78EC3AD2-0976-4458-9751-F665A55C6448");
+        $CardTokenChargePayload->setCardToken('pay_tok_78EC3AD2-0976-4458-9751-F665A55C6448');
 
         try {
             /** @var CardTokenChargeCreate $CardTokenChargePayload * */
@@ -151,7 +151,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
     // charge by card id
     public function charge()
     {
-        $apiClient = new ApiClient(Config::get("payments.key.Checkout"));
+        $apiClient = new ApiClient(Config::get('payments.key.Checkout'));
         $charge = $apiClient->chargeService();
 
         // create an instance of CardIdChargeCreate Model
@@ -165,12 +165,12 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
         $cardChargeIdPayload->setValue($this->amount);
         $cardChargeIdPayload->setCurrency('usd');
         $cardChargeIdPayload->setTrackId('Demo-0001');
-        $cardChargeIdPayload->setCardId($this->user->payment_info()->where('payment_provider', $this->processor)->first()->payment_token);
+        $cardChargeIdPayload->setCardId($this->user->payment_info()->where('payment_provider', Config::get('payments.processor.Checkout'))->first()->payment_token);
 
         try {
             /**  @var Charge $ChargeResponse * */
             $ChargeResponse = $charge->chargeWithCardId($cardChargeIdPayload);
-            
+
             return $ChargeResponse;
 
         } catch (Exception $e) {

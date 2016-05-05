@@ -4,7 +4,7 @@
 ### Payments Package for Laravel 5.* ###
 
 * Package for multiple payment methods
-* Version 1.0.0
+* Version 1.0.3
 * https://bitbucket.org/cloudhorizon/payments/
 * This package uses https://github.com/CKOTech/checkout-php-library for checkout.com payment processor
 
