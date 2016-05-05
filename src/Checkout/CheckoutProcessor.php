@@ -3,7 +3,7 @@
 namespace Panic\Payments\Checkout;
 
 
-include(__DIR__ . '/../../vendor/checkout/checkout-php-api/autoload.php');
+include(base_path() . '/vendor/checkout/checkout-php-api/autoload.php');
 use com\checkout;
 
 use Panic\Payments\BaseProcessor;
