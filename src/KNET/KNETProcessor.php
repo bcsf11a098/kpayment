@@ -2,10 +2,12 @@
 
 namespace Panic\Payments\KNET;
 
+
 use Panic\Payments\PaymentProcessorInterface;
+use Panic\Payments\BaseProcessor;
 
 
-class KNETProcessor implements PaymentProcessorInterface
+class KNETProcessor extends BaseProcessor implements PaymentProcessorInterface
 {
     public function charge()
     {

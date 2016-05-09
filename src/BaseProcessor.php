@@ -7,7 +7,7 @@ class BaseProcessor
 {
     protected $user;
     protected $amount;
-    protected $transactionID;
+    protected $data;
 
     public function setAmount($amount)
     {
@@ -22,9 +22,9 @@ class BaseProcessor
         return $this;
     }
 
-    public function setTransactionID($transactionID)
+    public function setData($data)
     {
-        $this->transactionID = $transactionID;
+        $this->data = $data;
         return $this;
     }
 

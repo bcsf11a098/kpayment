@@ -158,23 +158,24 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
         $cardChargeIdPayload = new CardIdChargeCreate();
 
         //initializing model to generate payload
-
         $cardChargeIdPayload->setEmail($this->user->email);
         $cardChargeIdPayload->setAutoCapture('N');
         $cardChargeIdPayload->setAutoCapTime('0');
         $cardChargeIdPayload->setValue($this->amount);
         $cardChargeIdPayload->setCurrency('usd');
-        $cardChargeIdPayload->setTrackId('Demo-0001');
+        $cardChargeIdPayload->setTrackId($this->data['orderId']);
         $cardChargeIdPayload->setCardId($this->user->payment_info()->where('payment_provider', Config::get('payments.processor.Checkout'))->first()->payment_token);
 
         try {
             /**  @var Charge $ChargeResponse * */
             $ChargeResponse = $charge->chargeWithCardId($cardChargeIdPayload);
 
-            return $ChargeResponse;
+            $response = array('success' => true , 'data' => $ChargeResponse->json);
 
         } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return array('success' => false , 'error' => 'Caught exception: ' . $e->getErrorMessage());
         }
+
+        return $response;
     }
 }

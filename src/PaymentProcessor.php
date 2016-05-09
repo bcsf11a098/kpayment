@@ -26,16 +26,16 @@ class PaymentProcessor implements PaymentProcessorInterface
         return $this;
     }
 
-    public function setTransactionID($transactionID)
+    public function setData($data)
     {
-        $this->processor->setTransactionID($transactionID);
+        $this->processor->setData($data);
         return $this;
     }
 
 
     public function charge()
     {
-        $this->processor->charge();
+        return $this->processor->charge();
     }
 
     public function setProcessor($processorFlag)

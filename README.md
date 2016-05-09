@@ -4,7 +4,7 @@
 ### Payments Package for Laravel 5.* ###
 
 * Package for multiple payment methods
-* Version 1.0.4
+* Version 1.0.5
 * https://bitbucket.org/cloudhorizon/payments/
 * This package uses https://github.com/CKOTech/checkout-php-library for checkout.com payment processor
 
@@ -53,7 +53,7 @@ use Panic\Payments\PaymentProcessor;
 public function checkout(PaymentProcessor $processor)
     {
         ...
-        $response = $processor->setProcessor(1)->setUser($user)->setAmount(100)->charge();
+        $response = $processor->setProcessor(1)->setUser($user)->setAmount($amount)->setData($data)->charge();
         ...
     }
 ```
