@@ -26,7 +26,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
 {
     public function createCustomer()
     {
-        $apiClient = new ApiClient(Config::get('payments.key.Checkout'));
+        $apiClient = new ApiClient(Config::get('payments.Checkout.key'));
         $customerService = $apiClient->customerService();
 
         $customerCreateObject = new CustomerCreate();
@@ -73,7 +73,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
 
     public function createCard()
     {
-        $apiClient = new ApiClient(Config::get('payments.key.Checkout'));
+        $apiClient = new ApiClient(Config::get('payments.Checkout.key'));
         $cardService = $apiClient->cardService();
         $cardsRequestModel = new CardCreate();
 
@@ -113,7 +113,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
 
     public function chargeByCardToken()
     {
-        $apiClient = new ApiClient(Config::get('payments.key.Checkout'));
+        $apiClient = new ApiClient(Config::get('payments.Checkout.key'));
         $charge = $apiClient->chargeService();
 
         // create an instance of CardTokenChargeCreate Model
@@ -151,7 +151,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
     // charge by card id
     public function charge()
     {
-        $apiClient = new ApiClient(Config::get('payments.key.Checkout'));
+        $apiClient = new ApiClient(Config::get('payments.Checkout.key'));
         $charge = $apiClient->chargeService();
 
         // create an instance of CardIdChargeCreate Model
@@ -164,7 +164,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
         $cardChargeIdPayload->setValue($this->amount);
         $cardChargeIdPayload->setCurrency('usd');
         $cardChargeIdPayload->setTrackId($this->data['orderId']);
-        $cardChargeIdPayload->setCardId($this->user->payment_info()->where('payment_provider', Config::get('payments.processor.Checkout'))->first()->payment_token);
+        $cardChargeIdPayload->setCardId($this->user->payment_info()->where('payment_provider', Config::get('payments.Checkout.processor'))->first()->payment_token);
 
         try {
             /**  @var Charge $ChargeResponse * */

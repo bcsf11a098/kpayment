@@ -43,11 +43,11 @@ class PaymentProcessor implements PaymentProcessorInterface
 
         switch ($processorFlag) {
 
-            case Config::get('payments.processor.Checkout') :
+            case Config::get('payments.Checkout.processor') :
                 $this->processor = new CheckoutProcessor;
                 break;
 
-            case Config::get('payments.processor.KNET') :
+            case Config::get('payments.KNET.processor') :
                 $this->processor = new KNETProcessor;
                 break;
 
