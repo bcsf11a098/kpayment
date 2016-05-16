@@ -1,6 +1,6 @@
 {
     "name": "panic/payments",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Multi payments package",
     "license": "MIT",
     "authors": [

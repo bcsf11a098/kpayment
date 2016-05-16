@@ -11,6 +11,7 @@ return [
         'processor' => 2,
         'alias' => '',
         'resource_path' => '',
+        'language' => 'ENG',
         'action' => 1,
         'currency' => 414,
         'success_url' => 'https://www.yourdomain.com/response.php',

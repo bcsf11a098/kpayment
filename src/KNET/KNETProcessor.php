@@ -16,7 +16,7 @@ class KNETProcessor extends BaseProcessor implements PaymentProcessorInterface
 
         $Pipe->setAction(Config::get('payments.KNET.action'));
         $Pipe->setCurrency(Config::get('payments.KNET.currency'));
-        $Pipe->setLanguage("ENG"); //change it to "ARA" for arabic language
+        $Pipe->setLanguage(Config::get('payments.KNET.language')); //change it to "ARA" for arabic language
         $Pipe->setResponseURL(Config::get('payments.KNET.response_url')); // set your respone page URL
         $Pipe->setErrorURL(Config::get('payments.KNET.error_url')); //set your error page URL
         $Pipe->setAmt($this->amount); //set the amount for the transaction
