@@ -111,7 +111,8 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
         }
     }
 
-    public function chargeByCardToken()
+    // charge by card token
+    public function charge()
     {
         $apiClient = new ApiClient(Config::get('payments.Checkout.key'));
         $charge = $apiClient->chargeService();
@@ -119,37 +120,29 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
         // create an instance of CardTokenChargeCreate Model
         $CardTokenChargePayload = new CardTokenChargeCreate();
         //initializing model to generate payload
-        $billingDetails = new Address();
-        $phone = new Phone();
-        $phone->setNumber("203 583 44 55");
-        $phone->setCountryCode("44");
 
-        $billingDetails->setAddressLine1('1 Glading Fields"');
-        $billingDetails->setPostcode('N16 2BR');
-        $billingDetails->setCountry('GB');
-        $billingDetails->setCity('London');
-        $billingDetails->setPhone($phone);
-
-
-        $CardTokenChargePayload->setEmail('demo@checkout.com');
-        $CardTokenChargePayload->setAutoCapture('N');
-        $CardTokenChargePayload->setAutoCapTime('0');
-        $CardTokenChargePayload->setValue('100');
-        $CardTokenChargePayload->setCurrency('usd');
-        $CardTokenChargePayload->setTrackId('Demo-0001');
-        $CardTokenChargePayload->setCardToken('pay_tok_78EC3AD2-0976-4458-9751-F665A55C6448');
+        $CardTokenChargePayload->setEmail($this->user->email);
+        $CardTokenChargePayload->setAutoCapture(Config::get('payments.Checkout.auto_capture'));
+        $CardTokenChargePayload->setAutoCapTime(Config::get('payments.Checkout.auto_cap_time'));
+        $CardTokenChargePayload->setValue($this->amount);
+        $CardTokenChargePayload->setCurrency(Config::get('payments.Checkout.currency'));
+        $CardTokenChargePayload->setTrackId($this->data['orderId']);
+        $CardTokenChargePayload->setCardToken($this->user->payment_info()->where('payment_provider', Config::get('payments.Checkout.processor'))->first()->payment_token);
 
         try {
             /** @var CardTokenChargeCreate $CardTokenChargePayload * */
             $ChargeResponse = $charge->chargeWithCardToken($CardTokenChargePayload);
-            dd($ChargeResponse);
+
+            $response = array('success' => true , 'data' => $ChargeResponse->json);
 
         } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return array('success' => false , 'error' => 'Caught exception: ' . $e->getErrorMessage());
         }
+
+        return $response;
     }
     // charge by card id
-    public function charge()
+    public function chargeByCardId()
     {
         $apiClient = new ApiClient(Config::get('payments.Checkout.key'));
         $charge = $apiClient->chargeService();
@@ -159,10 +152,10 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
 
         //initializing model to generate payload
         $cardChargeIdPayload->setEmail($this->user->email);
-        $cardChargeIdPayload->setAutoCapture('N');
-        $cardChargeIdPayload->setAutoCapTime('0');
+        $cardChargeIdPayload->setAutoCapture(Config::get('payments.Checkout.auto_capture'));
+        $cardChargeIdPayload->setAutoCapTime(Config::get('payments.Checkout.auto_cap_time'));
         $cardChargeIdPayload->setValue($this->amount);
-        $cardChargeIdPayload->setCurrency('usd');
+        $cardChargeIdPayload->setCurrency(Config::get('payments.Checkout.currency'));
         $cardChargeIdPayload->setTrackId($this->data['orderId']);
         $cardChargeIdPayload->setCardId($this->user->payment_info()->where('payment_provider', Config::get('payments.Checkout.processor'))->first()->payment_token);
 

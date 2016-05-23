@@ -4,7 +4,10 @@ return [
     
     'Checkout' => [
         'processor' => 1,
-        'key' => ''
+        'key' => '',
+        'auto_capture' => 'N',
+        'auto_cap_time' => '0',
+        'currency' => 'usd'
     ],
     
     'KNET' => [
