@@ -38,7 +38,7 @@ class KNETProcessor extends BaseProcessor implements PaymentProcessorInterface
             $payID = $Pipe->getPaymentId();
             $payURL = $Pipe->getPaymentPage();
             $Pipe->getDebugMsg();
-            $responseUrl = $payURL . '?PaymentID=' . $payID;
+            $responseUrl = $payURL . 'PaymentID=' . $payID;
             
             return array('success' => true , 'payment_url' => $responseUrl, 'debug' => $Pipe->getDebugMsg());
         }
