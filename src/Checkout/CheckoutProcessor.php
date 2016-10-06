@@ -112,7 +112,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
     }
 
     // charge by card token
-    public function charge()
+    public function chargeByCardToken()
     {
         $apiClient = new ApiClient(Config::get('payments.Checkout.key'), Config::get('payments.Checkout.mode'));
         $charge = $apiClient->chargeService();
@@ -142,9 +142,9 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
         return $response;
     }
     // charge by card id
-    public function chargeByCardId()
+    public function charge()
     {
-        $apiClient = new ApiClient(Config::get('payments.Checkout.key'));
+        $apiClient = new ApiClient(Config::get('payments.Checkout.key'), Config::get('payments.Checkout.mode'));
         $charge = $apiClient->chargeService();
 
         // create an instance of CardIdChargeCreate Model
