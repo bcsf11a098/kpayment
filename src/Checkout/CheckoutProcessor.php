@@ -114,7 +114,7 @@ class CheckoutProcessor extends BaseProcessor implements PaymentProcessorInterfa
     // charge by card token
     public function charge()
     {
-        $apiClient = new ApiClient(Config::get('payments.Checkout.key'));
+        $apiClient = new ApiClient(Config::get('payments.Checkout.key'), Config::get('payments.Checkout.mode'));
         $charge = $apiClient->chargeService();
 
         // create an instance of CardTokenChargeCreate Model

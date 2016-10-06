@@ -4,7 +4,7 @@
 ### Payments Package for Laravel 5.* ###
 
 * Package for multiple payment methods, currently it supports Checkout.com and KNET payment providers
-* Version 1.0.10
+* Version 1.1.0
 * https://bitbucket.org/cloudhorizon/payments/
 * This package uses https://github.com/CKOTech/checkout-php-library for checkout.com payment processor and KNET payment pipe
 
